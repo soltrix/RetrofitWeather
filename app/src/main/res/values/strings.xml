@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Retrofit</string>
+    <string name="api_key">ApiKey</string>
+    <string name="city">Город,страна</string>
+    <string name="spb">Saint Petersburg,ru</string>
+    <string name="get">Получить</string>
+    <string name="temp">Температура</string>
+    <string name="zero">0</string>
+</resources>
