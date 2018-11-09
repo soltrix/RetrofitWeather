@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     private OpenWeather openWeather;
     private TextView textTemp;              // Температура
+    private TextView textPressure;              // Давление
+    private TextView textHumidity;              // Влажность
     private TextInputEditText editCity;
     private TextInputEditText editApiKey;
     private SharedPreferences sharedPref;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     // проинициализировать пользовательские элементы
     private void initGui() {
         textTemp = findViewById(R.id.textTemp);
+        textPressure = findViewById(R.id.textPressure);
+        textHumidity = findViewById(R.id.textHumidity);
         editApiKey = findViewById(R.id.editApiKey);
         editCity = findViewById(R.id.editCity);
     }
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 savePreferences();    // сохранить настройки
-                requestRetrofit(editCity.getText().toString(), editApiKey.getText().toString());
+                requestRetrofit(editCity.getText().toString(), editApiKey.getText().toString(), "metric");
             }
         });
     }
@@ -89,14 +93,16 @@ public class MainActivity extends AppCompatActivity {
         openWeather = retrofit.create(OpenWeather.class);
     }
 
-    private void requestRetrofit(String city, String keyApi) {
-        openWeather.loadWeather(city, keyApi)
+    private void requestRetrofit(String city, String keyApi, String unitsApi) {
+        openWeather.loadWeather(city, keyApi, unitsApi)
                 .enqueue(new Callback<WeatherRequest>() {
                     @Override
                     public void onResponse(@NonNull Call<WeatherRequest> call,
                                            @NonNull Response<WeatherRequest> response) {
                         if (response.body() != null)
                             textTemp.setText(Float.toString(response.body().getMain().getTemp()));
+                            textPressure.setText(Float.toString(response.body().getMain().getPressure()));
+                            textHumidity.setText(Float.toString(response.body().getMain().getHumidity()));
                     }
 
                     @Override

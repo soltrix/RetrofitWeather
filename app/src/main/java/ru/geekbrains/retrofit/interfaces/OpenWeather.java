@@ -8,5 +8,5 @@ import ru.geekbrains.retrofit.model.WeatherRequest;
 public interface OpenWeather {
 
     @GET("data/2.5/weather")
-    Call<WeatherRequest> loadWeather(@Query("q") String cityCountry, @Query("appid") String keyApi);
+    Call<WeatherRequest> loadWeather(@Query("q") String cityCountry, @Query("appid") String keyApi, @Query("units") String unitsApi);
 }

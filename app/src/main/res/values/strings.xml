@@ -5,5 +5,7 @@
     <string name="spb">Saint Petersburg,ru</string>
     <string name="get">Получить</string>
     <string name="temp">Температура</string>
+    <string name="pressure">Давление</string>
+    <string name="humidity">Влажность</string>
     <string name="zero">0</string>
 </resources>
