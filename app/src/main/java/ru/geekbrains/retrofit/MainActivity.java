@@ -26,11 +26,14 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText editCity;
     private TextInputEditText editApiKey;
     private SharedPreferences sharedPref;
+    private SQLiteHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new SQLiteHandler(getApplicationContext());
 
         initRetrofit();
         initGui();
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 savePreferences();    // сохранить настройки
                 requestRetrofit(editCity.getText().toString(), editApiKey.getText().toString(), "metric");
+                db.addWeather(editCity.getText().toString(), textTemp.getText().toString(), textPressure.getText().toString(), textHumidity.getText().toString());
+                db.getWeatherDetails();
             }
         });
     }
@@ -103,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                             textTemp.setText(Float.toString(response.body().getMain().getTemp()));
                             textPressure.setText(Float.toString(response.body().getMain().getPressure()));
                             textHumidity.setText(Float.toString(response.body().getMain().getHumidity()));
+
                     }
 
                     @Override
