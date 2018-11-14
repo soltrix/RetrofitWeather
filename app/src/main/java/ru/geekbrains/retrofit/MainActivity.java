@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     // загрузить настройки
     private void loadPreferences() {
-        String loadedApiKey = sharedPref.getString("apiKey", "29fb8d6056fe0f462c0731feda71d342");
+        String loadedApiKey = sharedPref.getString("apiKey", String.valueOf(R.string.key));
         editApiKey.setText(loadedApiKey);
     }
 
